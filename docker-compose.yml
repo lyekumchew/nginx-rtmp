@@ -1,0 +1,17 @@
+version: "3.1"
+services:
+  nginx-rtmp:
+    build: .
+    ports:
+      - 1935:1935
+      - 8080:80
+    volumes:
+      - ./conf/mime.types:/etc/nginx/mime.types
+      - ./conf/nginx.conf:/etc/nginx/conf/nginx.conf
+      - ./wwwroot/:/app/wwwroot
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "10"
